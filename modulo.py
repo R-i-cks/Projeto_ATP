@@ -24,7 +24,7 @@ def listarAlfabeticamente(bd):
     return bd        
 
 
-#  ----- LISTAR POR DETERMINHADO GENERO ----------
+#  ----- LISTAR POR DETERMINADO GENERO ----------
 
 def listarGenero(bd, genero):
     novaBD=[]
@@ -33,3 +33,39 @@ def listarGenero(bd, genero):
             if elem==genero:
                 novaBD.append(filme)
     return novaBD
+
+
+#  --------------- CONTA FILMES ------------------
+
+def contaFilmes(bd):
+    i=0
+    for filme in bd:
+        i=i+1
+    return i
+
+#  ----------- DISTRIBUIÇÃO POR GÉNERO -----------
+
+def distribPorGenero(bd):
+    dic={}
+    for filme in bd:
+        for elem in (filme['genres']):
+            if elem in dic.keys():
+                dic[elem]=dic[elem]+1
+            else:
+                dic[elem]=1
+
+    return dic
+
+def plotGenero(d):
+    x=d.keys()
+    y=[]
+    for i in d.keys():
+        y.append(d[i])
+
+    fig = plt.figure(figsize=(45, 10))     # aumento da largura e altura do gráfico para que os nomes não se sobreponham
+    plt.xlabel("Género")
+    plt.ylabel("Quantidade")
+    plt.title("Distribuição por Género")
+    plt.margins(x=0.005)                   # diminuição das margens
+    plt.bar(x,y,width=0.9)
+    plt.show()

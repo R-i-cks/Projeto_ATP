@@ -69,3 +69,18 @@ def plotGenero(d):
     plt.margins(x=0.005)                   # diminuição das margens
     plt.bar(x,y,width=0.9)
     plt.show()
+
+
+def novofilme():       
+    nome=input("Title: ")
+    ano= input("Year: ")
+    nelenc=int(input("Cast lenght: "))
+    elenco=[]
+    for i in range(nelenc):
+        elenco.append(input("Cast: "))
+    ngen= int(input("Genres lenght"))
+    gen=[]
+    for j in range(ngen):
+        gen.append(input("Genres: "))
+    filme={"title":nome,"year":ano,"cast":elenco,"genres":gen}
+    return filme

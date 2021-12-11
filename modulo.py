@@ -7,7 +7,7 @@ def lerficheiro(nome):
     return dicJSON
 
 
-#  ------ LISTAR ALBAFETICAMENTE ----------------
+#  ------ LISTAR ALFABETICAMENTE ----------------
 
 def chaveOrd(d):
     chave=d['title'].replace("(","")

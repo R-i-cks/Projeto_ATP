@@ -6,6 +6,10 @@ def lerficheiro(nome):
     dicJSON = json.load(ficheiro)
     return dicJSON
 
+def guardarficheiro(nome,bd):
+    f= open(nome,'w',encoding='utf-8')
+    json.dump(bd,f,ensure_ascii=False,indent=2)
+
 
 #  ------ LISTAR ALFABETICAMENTE ----------------
 

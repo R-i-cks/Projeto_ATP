@@ -74,6 +74,7 @@ def plotGenero(d):
     plt.bar(x,y,width=0.9)
     plt.show()
 
+#  -------------- ADICIONAR NOVO FILME ---------------
 
 def novofilme():       
     nome=input("Title: ")
@@ -88,3 +89,13 @@ def novofilme():
         gen.append(input("Genres: "))
     filme={"title":nome,"year":ano,"cast":elenco,"genres":gen}
     return filme
+
+#  ----------- LISTAR FILMES DE DETERMINADO ATOR -----------
+
+def listarFilmeDeAtor(bd, a):
+    filmes=[]
+    for filme in bd:
+        for ator in filme['cast']:
+            if ator==a:
+                filmes.append(filme)
+    return filmes

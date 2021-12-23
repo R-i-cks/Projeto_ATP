@@ -1,10 +1,13 @@
 import json
 
 def lerficheiro(nome):
-    ficheiro = open(nome, encoding="utf-8")
-    bd=[]
-    dicJSON = json.load(ficheiro)
-    return dicJSON
+    if '.json' in nome:
+        ficheiro = open(nome, encoding="utf-8")
+        bd=[]
+        dicJSON = json.load(ficheiro)
+        return dicJSON
+    else:
+        return 
 
 def guardarficheiro(nome,bd):
     f= open(nome,'w',encoding='utf-8')
@@ -76,17 +79,7 @@ def plotGenero(d):
 
 #  -------------- ADICIONAR NOVO FILME ---------------
 
-def novofilme():       
-    nome=input("Title: ")
-    ano= input("Year: ")
-    nelenc=int(input("Cast lenght: "))
-    elenco=[]
-    for i in range(nelenc):
-        elenco.append(input("Cast: "))
-    ngen= int(input("Genres lenght"))
-    gen=[]
-    for j in range(ngen):
-        gen.append(input("Genres: "))
+def novofilme(nome,ano,elenco,gen):
     filme={"title":nome,"year":ano,"cast":elenco,"genres":gen}
     return filme
 

@@ -52,16 +52,17 @@ def contaFilmes(bd):
 
 #  ----------- DISTRIBUIÇÃO POR GÉNERO -----------
 
-def distribPorGenero(bd):
+def distribuicao(bd,obj):           
     dic={}
     for filme in bd:
-        for elem in (filme['genres']):
+        for elem in filme[obj]:
             if elem in dic.keys():
                 dic[elem]=dic[elem]+1
             else:
                 dic[elem]=1
-
     return dic
+
+
 
 def plotGenero(d):
     x=d.keys()

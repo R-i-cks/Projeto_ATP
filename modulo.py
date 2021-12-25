@@ -9,6 +9,21 @@ def lerficheiro(nome):
     else:
         return 
 
+
+def tiraext(nome):     
+    if '.' in nome:
+        n = nome.split('.')
+        nome = n[0]
+    return(nome)
+
+def dictolist(dic):
+    L=[]
+    for elem in dic.items():
+        key,value = elem
+        L.append(str(key) + ' :: ' + str(value))
+    return L
+
+
 def guardarficheiro(nome,bd):
     f= open(nome,'w',encoding='utf-8')
     json.dump(bd,f,ensure_ascii=False,indent=2)
@@ -93,3 +108,22 @@ def listarFilmeDeAtor(bd, a):
             if ator==a:
                 filmes.append(filme)
     return filmes
+
+
+def verfilmes(bd):      # Mostra os títulos de todos os filmes na bd
+    L=[]
+    for elem in bd:
+        L.append(elem['title'])  
+    return L
+
+def consultarfilme(filmes,nome):
+    correspondencia = []
+    nome.lower()
+    for elem in filmes:
+        if nome in elem.lower():
+            correspondencia.append(elem)
+    return correspondencia
+
+    
+
+

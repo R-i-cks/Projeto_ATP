@@ -144,16 +144,24 @@ def distribporAtor(bd):
                 dic[elem]=1
     return dic
 
+def top10Atores(d):
+    L=[]
+    i=0
+    orderActors = sorted(d.items(), key=lambda item: item[1], reverse=True)
+    for elem in orderActors:
+        if(i<10):
+            L.append(elem)
+            i=i+1
+        else:
+            break
+    return L
+    
 import matplotlib.pyplot as plt
 def plotAtor(d):
-    f=0
-    orderActors = sorted(d, key=d.get, reverse=True)
-    x=d.keys()
+    x=[f for f in d[0]]
     y=[]
-    while f<10:
-        for i in d.keys():
-            y.append(orderActors[i])
-        f=f+1
+    for i in x:
+        y.append((x,d[i]))
     fig = plt.figure(figsize=(45, 10))     # aumento da largura e altura do gráfico para que os nomes não se sobreponham
     plt.xlabel("Ator")
     plt.ylabel("Quantidade")
@@ -164,17 +172,10 @@ def plotAtor(d):
 
 BD=[]
 BD=lerficheiro('cinemaATP.json')
-plotAtor(distribporAtor(BD))
+plotAtor(top10Atores(distribporAtor(BD)))
 
 #-----------(Função extra) Indicam a lista de filmes dos 10 melhores atores respetivamente---------
-def top10Atores(d):
-    L=[]
-    i=0
-    orderActors = sorted(d, key=d.get, reverse=True)
-    while(i<10):
-        L.append(orderActors[i])
-        i=i+1
-    return L
+
 
 def consultarFilme(bd,atores):
     procuraBD={}

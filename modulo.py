@@ -65,6 +65,14 @@ def contaFilmes(bd):
         i=i+1
     return i
 
+#  ----- CONSULTAR UM FILME -------
+def consultarFilme(bd,procura):
+    procuraBD=[]
+    for filme in bd:
+        if procura in filme['title']:
+            procuraBD.append(filme)
+    return procuraBD
+
 #  ----------- DISTRIBUIÇÃO POR GÉNERO -----------
 
 def distribuicao(bd,obj):           
@@ -124,6 +132,62 @@ def consultarfilme(filmes,nome):
             correspondencia.append(elem)
     return correspondencia
 
+# ------------- DISTRIBUIR FILMES POR ATORES (TOP10) -----------
+
+def distribporAtor(bd):
+    dic={}
+    for filme in bd:
+        for elem in (filme['cast']):
+            if elem in dic.keys():
+                dic[elem]=dic[elem]+1
+            else:
+                dic[elem]=1
+    return dic
+
+import matplotlib.pyplot as plt
+def plotAtor(d):
+    f=0
+    orderActors = sorted(d, key=d.get, reverse=True)
+    x=d.keys()
+    y=[]
+    while f<10:
+        for i in d.keys():
+            y.append(orderActors[i])
+        f=f+1
+    fig = plt.figure(figsize=(45, 10))     # aumento da largura e altura do gráfico para que os nomes não se sobreponham
+    plt.xlabel("Ator")
+    plt.ylabel("Quantidade")
+    plt.title("Distribuição por Filme")
+    plt.margins(x=0.005)                   # diminuição das margens
+    plt.bar(x,y,width=0.9)
+    plt.show()
+
+BD=[]
+BD=lerficheiro('cinemaATP.json')
+plotAtor(distribporAtor(BD))
+
+#-----------(Função extra) Indicam a lista de filmes dos 10 melhores atores respetivamente---------
+def top10Atores(d):
+    L=[]
+    i=0
+    orderActors = sorted(d, key=d.get, reverse=True)
+    while(i<10):
+        L.append(orderActors[i])
+        i=i+1
+    return L
+
+def consultarFilme(bd,atores):
+    procuraBD={}
+    for filme in bd:
+        for elem in atores:
+            if elem in filme['cast']:
+                if elem not in procuraBD.keys():
+                    lista=[]
+                else:
+                    lista=procuraBD[elem]
+                lista.append(filme['title'])
+                procuraBD[elem]=lista
+    return procuraBD
     
 
 

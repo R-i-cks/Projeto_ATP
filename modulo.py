@@ -66,11 +66,11 @@ def contaFilmes(bd):
     return i
 
 #  ----- CONSULTAR UM FILME -------
-def consultarFilme(bd,procura):
+def inverEstF(bd,procura):
     procuraBD=[]
     for filme in bd:
         if procura in filme['title']:
-            procuraBD.append(filme)
+            procuraBD.append(filme['title'])
     return procuraBD
 
 #  ----------- DISTRIBUIÇÃO POR GÉNERO -----------
@@ -118,11 +118,6 @@ def listarFilmeDeAtor(bd, a):
     return filmes
 
 
-def verfilmes(bd):      # Mostra os títulos de todos os filmes na bd
-    L=[]
-    for elem in bd:
-        L.append(elem['title'])  
-    return L
 
 def consultarfilme(filmes,nome):
     correspondencia = []
@@ -170,9 +165,6 @@ def plotAtor(d):
     plt.bar(x,y,width=0.9)
     plt.show()
 
-BD=[]
-BD=lerficheiro('cinemaATP.json')
-plotAtor(top10Atores(distribporAtor(BD)))
 
 #-----------(Função extra) Indicam a lista de filmes dos 10 melhores atores respetivamente---------
 
@@ -192,3 +184,15 @@ def consultarFilme(bd,atores):
     
 
 
+# ------ Função que retorna uma lista de filmes que façam parte de um género ou que tenha determinado ator no cast
+
+def inverEstrAG(bd,chave,pesquisa):
+    resultado=[]
+    for filme in bd:
+        presente = False
+        for elem in filme[chave]:
+            if pesquisa in elem:
+                presente = True
+        if presente == True:
+            resultado.append(filme['title'])
+    return resultado

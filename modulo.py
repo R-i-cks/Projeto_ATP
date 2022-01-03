@@ -71,7 +71,7 @@ def consultarFilme(bd,procura):
     for filme in bd:
         if procura in filme['title']:
             procuraBD.append(filme)
-    print(procuraBD)
+    
     return procuraBD
 
 
@@ -158,7 +158,7 @@ def top10Atores(d):
             break
     return L 
     
-import matplotlib.pyplot as plt
+
 def plotAtor(d):
     x=[]
     y=[]
@@ -174,11 +174,7 @@ def plotAtor(d):
     plt.bar(x,y,width=0.9)
     plt.show()
 
-BD=[]
-BD=lerficheiro('cinemaATP.json')
-plotAtor(top10Atores(distribporAtor(BD)))
-
-
+    
 #-----------(Função extra) Indicam a lista de filmes dos 10 melhores atores respetivamente---------
 
 

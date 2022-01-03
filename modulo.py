@@ -71,7 +71,9 @@ def consultarFilme(bd,procura):
     for filme in bd:
         if procura in filme['title']:
             procuraBD.append(filme)
+    print(procuraBD)
     return procuraBD
+
 
 #  ----------- DISTRIBUIÇÃO POR GÉNERO -----------
 
@@ -154,14 +156,16 @@ def top10Atores(d):
             i=i+1
         else:
             break
-    return L
+    return L 
     
 import matplotlib.pyplot as plt
 def plotAtor(d):
-    x=[f for f in d[0]]
+    x=[]
     y=[]
-    for i in x:
-        y.append((x,d[i]))
+    print(d)
+    for f in d:
+        x.append(f[0])
+        y.append(f[1])
     fig = plt.figure(figsize=(45, 10))     # aumento da largura e altura do gráfico para que os nomes não se sobreponham
     plt.xlabel("Ator")
     plt.ylabel("Quantidade")
@@ -173,6 +177,7 @@ def plotAtor(d):
 BD=[]
 BD=lerficheiro('cinemaATP.json')
 plotAtor(top10Atores(distribporAtor(BD)))
+
 
 #-----------(Função extra) Indicam a lista de filmes dos 10 melhores atores respetivamente---------
 

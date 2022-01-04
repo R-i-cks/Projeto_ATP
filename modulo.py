@@ -149,20 +149,20 @@ def distribporAtor(bd):
 def top10Atores(d):
     L=[]
     i=0
-    orderActors = sorted(d.items(), key=lambda item: item[1], reverse=True)
+    orderActors = sorted(d.items(), key=lambda item: item[1], reverse=True) #. items() trandorma o dicionário em tuplos
     for elem in orderActors:
         if(i<10):
             L.append(elem)
             i=i+1
         else:
             break
-    return L 
-    
+    return L
+
 
 def plotAtor(d):
     x=[]
     y=[]
-    print(d)
+    
     for f in d:
         x.append(f[0])
         y.append(f[1])

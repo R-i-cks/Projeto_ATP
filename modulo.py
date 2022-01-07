@@ -63,7 +63,7 @@ def contaFilmes(bd):
     i=0
     for filme in bd:
         i=i+1
-    return i
+    return ['Há ' +str(i)+ ' filmes na Base de Dados!']
 
 #  ----- CONSULTAR UM FILME -------
 def consultarFilme(bd,procura):
@@ -116,7 +116,12 @@ def listarFilmeDeAtor(bd, a):
     for filme in bd:
         for ator in filme['cast']:
             if ator==a:
-                filmes.append(filme)
+                add=[]
+                add.append('title: ' + str(filme['title']))
+                add.append('year: ' + str(filme['year']))
+                add.append('cast: ' + str(filme['cast']))
+                add.append('genres: ' + str(filme['genres']))
+                filmes.append(add)
     return filmes
 
 

@@ -217,6 +217,15 @@ def inverEstF(bd,procura):
     return procuraBD
 
 
+def detNone(lista):   # Verifica a ocorrência de vazios em listas de informação
+    detetor = False
+    for elem in lista:
+        if elem == '':
+            detetor = True
+    return detetor
+
+
+
     
 
 

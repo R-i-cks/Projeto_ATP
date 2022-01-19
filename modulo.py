@@ -224,6 +224,18 @@ def detNone(lista):   # Verifica a ocorrência de vazios em listas de informaç�
             detetor = True
     return detetor
 
+#----------- ORDENA ATORES (EXTRA) ---------
+
+def ordenaAtores(bd):
+    atores={}
+    for filme in bd:
+        for ator in filme['cast']:
+            if ator in atores.keys():
+                atores[ator]=atores[ator]+', ' + filme['title']
+            else:
+                atores[ator]=filme['title']
+    atores=sorted(atores.items())
+    return atores
 
 
     

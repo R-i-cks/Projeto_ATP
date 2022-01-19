@@ -105,8 +105,8 @@ def plotGenero(d):
 
 #  -------------- ADICIONAR NOVO FILME ---------------
 
-def novofilme(nome,ano,elenco,gen):
-    filme={"title":nome,"year":ano,"cast":elenco,"genres":gen}
+def novofilme(lista):
+    filme={"title":lista[0],"year":lista[1],"cast":lista[2],"genres":lista[3]}
     return filme
 
 #  ----------- LISTAR FILMES DE DETERMINADO ATOR -----------

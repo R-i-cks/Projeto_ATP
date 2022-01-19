@@ -195,6 +195,28 @@ def consultarFilme(bd,atores):
                 lista.append(filme['title'])
                 procuraBD[elem]=lista
     return procuraBD
+
+
+def inverEstrAG(bd,chave,pesquisa):
+    resultado=[]
+    for filme in bd:
+        presente = False
+        for elem in filme[chave]:
+            if pesquisa in elem:
+                presente = True
+        if presente == True:
+            resultado.append(filme['title'])
+    return resultado
+
+#  ----- CONSULTAR UM FILME -------
+def inverEstF(bd,procura):
+    procuraBD=[]
+    for filme in bd:
+        if procura in filme['title']:
+            procuraBD.append(filme['title'])
+    return procuraBD
+
+
     
 
 

@@ -57,6 +57,34 @@ def listarGenero(bd, genero):
     return novaBD
 
 
+def replace(list):
+    ll=[]
+    cast=""
+    genres=""
+    for el in list:
+        i=1
+        j=1
+        cast=""
+        genres=""
+        for nn in el['cast']:
+            if i==len(el['cast']):
+                cast=cast+nn 
+            else:
+                cast=cast+nn+", "
+            i=i+1
+        for gg in el['genres']:
+            if j==len(el['genres']):
+                genres=genres+gg 
+            else:
+                genres=genres+gg+", "
+            j=j+1
+        el['cast']=cast
+        el['genres']=genres
+        jj='Title: {title}; Year: {year}; Cast: {cast}; Genres {genres}.'.format(**el) 
+        ll.append(jj) 
+    return ll
+
+
 #  --------------- CONTA FILMES ------------------
 
 def contaFilmes(bd):

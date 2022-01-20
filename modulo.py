@@ -48,11 +48,12 @@ def id(bd):
 def chaveOrd(d):
     chave=d['title'].replace("(","")
     chave=chave.replace(")","")
+    chave=chave.replace("/","")
     chave=chave.replace("\'","")
-    chave=chave.replace("/'","")
-    chave=chave.replace(".'","")
-    chave=chave.replace(":'","")
+    chave=chave.replace(".","")
+    chave=chave.replace(":","")
     chave=chave.replace(",","")
+    chave=chave.replace("\"","")
     return chave
 
 def listarAlfabeticamente(bd):
@@ -271,14 +272,20 @@ def ordenaAtores(bd):
     atores={}
     for filme in bd:
         for ator in filme['cast']:
-            if ator in atores.keys():
-                atores[ator]=atores[ator]+', ' + filme['title']
-            else:
-                atores[ator]=filme['title']
+            ator=ator.replace("/","")
+            ator=ator.replace("\"","")
+            ator=ator.replace("/","")
+            ator=ator.replace("(","")
+            ator=ator.replace(")","")
+            ator=ator.replace(".","")
+            ator=ator.replace("\'","")
+            if ator!="":
+                if ator in atores.keys():
+                    atores[ator]=atores[ator]+', ' + filme['title']
+                else:
+                    atores[ator]=filme['title']
     atores=sorted(atores.items())
     return atores
 
-
-    
 
 

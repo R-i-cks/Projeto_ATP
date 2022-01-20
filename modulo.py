@@ -31,9 +31,17 @@ def guardarficheiro(nome,bd):
 
 def id(bd):
     i=1
+    listaID = []
     for filme in bd:
-        filme['id']=('id_'+str(i))
-        i=i+1
+        if filme.get('id') != None:
+            listaID.append(filme.get('id'))
+    for filme in bd:
+        if filme.get('id') == None: 
+            while str(i) in listaID:
+                i=i+1
+            filme['id']=(str(i))
+            i=i+1
+
 #  ------ LISTAR ALFABETICAMENTE ----------------
 
 def chaveOrd(d):

@@ -56,6 +56,32 @@ def listarGenero(bd, genero):
                 novaBD.append(filme)
     return novaBD
 
+def replace(list):
+    ll=[]
+    cast=""
+    genres=""
+    for el in list:
+        i=1
+        j=1
+        cast=""
+        genres=""
+        for nn in el['cast']:
+            if i==len(el['cast']):
+                cast=cast+nn 
+            else:
+                cast=cast+nn+", "
+            i=i+1
+        for gg in el['genres']:
+            if j==len(el['genres']):
+                genres=genres+gg 
+            else:
+                genres=genres+gg+", "
+            j=j+1
+        el['cast']=cast
+        el['genres']=genres
+        jj='Title: {title}; Year: {year}; Cast: {cast}; Genres: {genres}.'.format(**el) 
+        ll.append(jj) 
+    return ll
 
 #  --------------- CONTA FILMES ------------------
 
@@ -116,11 +142,12 @@ def listarFilmeDeAtor(bd, a):
     for filme in bd:
         for ator in filme['cast']:
             if ator==a:
-                add=[]
-                add.append('title: ' + str(filme['title']))
-                add.append('year: ' + str(filme['year']))
-                add.append('cast: ' + str(filme['cast']))
-                add.append('genres: ' + str(filme['genres']))
+                add={
+                    "title" : filme['title'],
+                    "year" : filme['year'],
+                    "cast" : filme['cast'],
+                    "genres" : filme['genres']
+                }
                 filmes.append(add)
     return filmes
 
@@ -133,7 +160,7 @@ def verfilmes(bd):      # Mostra os títulos de todos os filmes na bd
 
 def consultarfilme(filmes,nome):
     correspondencia = []
-    nome.lower()
+    nome=nome.lower()
     for elem in filmes:
         if nome in elem.lower():
             correspondencia.append(elem)

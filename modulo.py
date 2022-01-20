@@ -93,7 +93,7 @@ def replace(list):
             j=j+1
         el['cast']=cast
         el['genres']=genres
-        jj='Title: {title}; Year: {year}; Cast: {cast}; Genres: {genres}.'.format(**el) 
+        jj=' Title: {title}; Year: {year}; Cast: {cast}; Genres: {genres}.'.format(**el) 
         ll.append(jj) 
     return ll
 

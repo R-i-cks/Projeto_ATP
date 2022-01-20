@@ -1,5 +1,4 @@
 import json
-from re import I
 
 def lerficheiro(nome):
     if '.json' in nome:

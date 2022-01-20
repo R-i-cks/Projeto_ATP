@@ -220,8 +220,8 @@ def ordenaAtores(bd):
             ator=ator.replace("\'","")
             if ator!="":
                 if ator in atores.keys():
-                    atores[ator]=atores[ator]+', ' + filme['title']
+                    atores[ator]=atores[ator]+', ' + filme['title'] + ': ' + filme['id']
                 else:
-                    atores[ator]=filme['title']
+                    atores[ator]=filme['title']+ ': ' + filme['id']
     atores=sorted(atores.items())
     return atores

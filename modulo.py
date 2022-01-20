@@ -1,4 +1,5 @@
 import json
+from re import I
 
 def lerficheiro(nome):
     if '.json' in nome:
@@ -29,6 +30,11 @@ def guardarficheiro(nome,bd):
     json.dump(bd,f,ensure_ascii=False,indent=2)
 
 
+def id(bd):
+    i=1
+    for filme in bd:
+        filme['id']=('id_'+str(i))
+        i=i+1
 #  ------ LISTAR ALFABETICAMENTE ----------------
 
 def chaveOrd(d):

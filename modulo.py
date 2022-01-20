@@ -16,6 +16,8 @@ def tiraext(nome):
         nome = n[0]
     return(nome)
 
+#  ------------- DICIONARIO PARA LISTA ----------------
+
 def dictolist(dic):
     L=[]
     for elem in dic.items():
@@ -23,12 +25,14 @@ def dictolist(dic):
         L.append(str(key) + ' :: ' + str(value))
     return L
 
+#  -------------- GUARDAR FICHEIRO ----------------
 
 def guardarficheiro(nome,bd):
     f= open(nome,'w',encoding='utf-8')
     json.dump(bd,f,ensure_ascii=False,indent=2)
 
-
+#  ------------- CONSTRUÇAO DE IDS ----------------
+    
 def id(bd):
     i=1
     listaID = []
@@ -60,7 +64,7 @@ def listarAlfabeticamente(bd):
     bd.sort(key=chaveOrd)
     return bd        
 
-
+# ------------- FORMATACAO ----------------
 
 def formatacao(bd):
     i=0
@@ -111,13 +115,13 @@ def plotGenero(d):
     plt.bar(x,y,width=0.9)
     plt.show()
 
-#  -------------- ADICIONAR NOVO FILME ---------------
+#  ----------------------- ADICIONAR NOVO FILME ----------------------
 
 def novofilme(lista):
     filme={"title":lista[0],"year":lista[1],"cast":lista[2],"genres":lista[3]}
     return filme
 
-#  ----------- LISTAR FILMES DE DETERMINADO ATOR OU GÉNERO-----------
+#  ----------- LISTAR FILMES DE DETERMINADO ATOR OU GÉNERO -----------
 
 def listarAG(bd,a,tipo):
     filmes=[]
@@ -127,6 +131,7 @@ def listarAG(bd,a,tipo):
                 filmes.append(filme)
     return filmes
 
+#  ----------------------- CONSULTAR FILME ----------------------
 
 def consultarfilme(bd,nome):
     correspondencia = []
@@ -177,27 +182,7 @@ def plotAtor(d):
     plt.bar(x,y,width=0.9)
     plt.show()
 
-    
-
-def inverEstrAG(bd,chave,pesquisa):
-    resultado=[]
-    for filme in bd:
-        presente = False
-        for elem in filme[chave]:
-            if pesquisa in elem:
-                presente = True
-        if presente == True:
-            resultado.append(filme['title'])
-    return resultado
-
-#  ----- CONSULTAR UM FILME -------
-def inverEstF(bd,procura):
-    procuraBD=[]
-    for filme in bd:
-        if procura in filme['title']:
-            procuraBD.append(filme['title'])
-    return procuraBD
-
+# ------------- DETETAR LISTA VAZIA --------------
 
 def detNone(lista):   # Verifica a ocorrência de vazios em listas de informação
     detetor = False
@@ -207,7 +192,7 @@ def detNone(lista):   # Verifica a ocorrência de vazios em listas de informaç�
     return detetor
 
 
-#----------- ORDENA GENEROS (EXTRA) ---------
+# ------------- ORDENA GENEROS (EXTRA) -------------
 
 def ordenaGeneros(bd):
     generos={}
@@ -220,7 +205,8 @@ def ordenaGeneros(bd):
     generos=sorted(generos.items())
     return generos
     
-#----------- ORDENA ATORES (EXTRA) ---------
+# ------------- ORDENA ATORES (EXTRA) --------------
+
 def ordenaAtores(bd):
     atores={}
     for filme in bd:
@@ -239,7 +225,3 @@ def ordenaAtores(bd):
                     atores[ator]=filme['title']
     atores=sorted(atores.items())
     return atores
-
-
-
-

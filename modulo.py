@@ -61,42 +61,18 @@ def listarAlfabeticamente(bd):
     return bd        
 
 
-#  ----- LISTAR POR DETERMINADO GENERO ----------
 
-def listarGenero(bd, genero):
-    novaBD=[]
-    for filme in bd:
-        for elem in filme['genres']:               # Como os elementos da chave 'genres' estao em lista, temos de a percorrer
-            if elem==genero:
-                novaBD.append(filme)
-    return novaBD
-
-def replace(list):
-    ll=[]
-    cast=""
-    genres=""
-    for el in list:
-        i=1
-        j=1
-        cast=""
-        genres=""
-        for nn in el['cast']:
-            if i==len(el['cast']):
-                cast=cast+nn 
-            else:
-                cast=cast+nn+", "
-            i=i+1
-        for gg in el['genres']:
-            if j==len(el['genres']):
-                genres=genres+gg 
-            else:
-                genres=genres+gg+", "
-            j=j+1
-        el['cast']=cast
-        el['genres']=genres
-        jj=' Title: {title}; Year: {year}; Cast: {cast}; Genres: {genres}.'.format(**el) 
-        ll.append(jj) 
-    return ll
+def formatacao(bd):
+    i=0
+    form=[]
+    while i<len(bd):
+        if i==0:
+            form.append('Title |  Year  |  Cast  |   Genres  |  ID  ')
+        c = str(bd[i]['cast']).strip('[') 
+        d =str(bd[i]['genres']).strip('[')
+        form.append(bd[i]['title'] +' | ' +  str(bd[i]['year']) + ' | ' + c.strip(']') + ' | ' + d.strip(']') + ' | ' + bd[i]['id'] )
+        i=i+1
+    return form
 
 #  --------------- CONTA FILMES ------------------
 
@@ -105,15 +81,6 @@ def contaFilmes(bd):
     for filme in bd:
         i=i+1
     return ['Há ' +str(i)+ ' filmes na Base de Dados!']
-
-#  ----- CONSULTAR UM FILME -------
-def consultarFilme(bd,procura):
-    procuraBD=[]
-    for filme in bd:
-        if procura in filme['title']:
-            procuraBD.append(filme)
-    
-    return procuraBD
 
 
 #  ----------- DISTRIBUIÇÃO POR GÉNERO -----------
@@ -150,36 +117,25 @@ def novofilme(lista):
     filme={"title":lista[0],"year":lista[1],"cast":lista[2],"genres":lista[3]}
     return filme
 
-#  ----------- LISTAR FILMES DE DETERMINADO ATOR -----------
+#  ----------- LISTAR FILMES DE DETERMINADO ATOR OU GÉNERO-----------
 
-def listarFilmeDeAtor(bd, a):
+def listarAG(bd,a,tipo):
     filmes=[]
     for filme in bd:
-        for ator in filme['cast']:
-            if ator==a:
-                add={
-                    "title" : filme['title'],
-                    "year" : filme['year'],
-                    "cast" : filme['cast'],
-                    "genres" : filme['genres']
-                }
-                filmes.append(add)
+        for ator in filme[tipo]:
+            if a.lower() in ator.lower():
+                filmes.append(filme)
     return filmes
 
 
-def verfilmes(bd):      # Mostra os títulos de todos os filmes na bd
-    L=[]
-    for elem in bd:
-        L.append(elem['title'])  
-    return L
-
-def consultarfilme(filmes,nome):
+def consultarfilme(bd,nome):
     correspondencia = []
     nome=nome.lower()
-    for elem in filmes:
-        if nome in elem.lower():
+    for elem in bd:
+        if nome in elem['title'].lower():
             correspondencia.append(elem)
     return correspondencia
+
 
 # ------------- DISTRIBUIR FILMES POR ATORES (TOP10) -----------
 
@@ -222,22 +178,6 @@ def plotAtor(d):
     plt.show()
 
     
-#-----------(Função extra) Indicam a lista de filmes dos 10 melhores atores respetivamente---------
-
-
-def consultarFilme(bd,atores):
-    procuraBD={}
-    for filme in bd:
-        for elem in atores:
-            if elem in filme['cast']:
-                if elem not in procuraBD.keys():
-                    lista=[]
-                else:
-                    lista=procuraBD[elem]
-                lista.append(filme['title'])
-                procuraBD[elem]=lista
-    return procuraBD
-
 
 def inverEstrAG(bd,chave,pesquisa):
     resultado=[]
@@ -262,7 +202,7 @@ def inverEstF(bd,procura):
 def detNone(lista):   # Verifica a ocorrência de vazios em listas de informação
     detetor = False
     for elem in lista:
-        if elem == '':
+        if elem == None or elem =='':
             detetor = True
     return detetor
 

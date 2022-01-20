@@ -94,7 +94,7 @@ def replace(list):
             j=j+1
         el['cast']=cast
         el['genres']=genres
-        jj='Title: {title}; Year: {year}; Cast: {cast}; Genres: {genres}.'.format(**el) 
+        jj=' Title: {title}; Year: {year}; Cast: {cast}; Genres: {genres}.'.format(**el) 
         ll.append(jj) 
     return ll
 
@@ -266,8 +266,21 @@ def detNone(lista):   # Verifica a ocorrência de vazios em listas de informaç�
             detetor = True
     return detetor
 
-#----------- ORDENA ATORES (EXTRA) ---------
 
+#----------- ORDENA GENEROS (EXTRA) ---------
+
+def ordenaGeneros(bd):
+    generos={}
+    for filme in bd:
+        for gen in filme['genres']:
+            if gen in generos.keys():
+                generos[gen]=generos[gen]+', ' + filme['title']
+            else:
+                generos[gen]=filme['title']
+    generos=sorted(generos.items())
+    return generos
+    
+#----------- ORDENA ATORES (EXTRA) ---------
 def ordenaAtores(bd):
     atores={}
     for filme in bd:
@@ -286,6 +299,7 @@ def ordenaAtores(bd):
                     atores[ator]=filme['title']
     atores=sorted(atores.items())
     return atores
+
 
 
 

@@ -40,6 +40,7 @@ def id(bd):
             while str(i) in listaID:
                 i=i+1
             filme['id']=(str(i))
+            listaID.append(str(i))
             i=i+1
 
 #  ------ LISTAR ALFABETICAMENTE ----------------

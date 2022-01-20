@@ -198,13 +198,21 @@ def ordenaGeneros(bd):
     generos={}
     for filme in bd:
         for gen in filme['genres']:
-            if gen in generos.keys():
-                generos[gen]=generos[gen]+', ' + filme['title']
-            else:
-                generos[gen]=filme['title']
+            gen=gen.replace("/","")
+            gen=gen.replace("\"","")
+            gen=gen.replace("/","")
+            gen=gen.replace("(","")
+            gen=gen.replace(")","")
+            gen=gen.replace(".","")
+            gen=gen.replace("\'","")
+            if gen!="":
+                if gen in generos.keys():
+                    generos[gen]=generos[gen]+', ' + filme['title'] + ': ' + filme['id']
+                else:
+                    generos[gen]=filme['title']+ ': ' + filme['id']
     generos=sorted(generos.items())
     return generos
-    
+
 # ------------- ORDENA ATORES (EXTRA) --------------
 
 def ordenaAtores(bd):

@@ -279,6 +279,18 @@ def ordenaAtores(bd):
     return atores
 
 
+#----------- ORDENA GENEROS (EXTRA) ---------
+
+def ordenaGeneros(bd):
+    generos={}
+    for filme in bd:
+        for gen in filme['genres']:
+            if gen in generos.keys():
+                generos[gen]=generos[gen]+', ' + filme['title']
+            else:
+                generos[gen]=filme['title']
+    generos=sorted(generos.items())
+    return generos
     
 
 

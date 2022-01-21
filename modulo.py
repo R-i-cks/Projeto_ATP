@@ -184,12 +184,12 @@ def detNone(lista):   # Verifica a ocorrência de vazios em listas de informaç�
     return detetor
 
 
-# ------------- ORDENA GENEROS (EXTRA) -------------
+# ------------- ORDENA GENEROS E ATORES (EXTRA) -------------
 
-def ordenaGeneros(bd):
+def ordenaGenerosAtores(bd,tipo):
     generos={}
     for filme in bd:
-        for gen in filme['genres']:
+        for gen in filme[tipo]:
             gen=gen.replace("/","")
             gen=gen.replace("\"","")
             gen=gen.replace("/","")
@@ -204,24 +204,3 @@ def ordenaGeneros(bd):
                     generos[gen]=filme['title']+ ': ' + filme['id']
     generos=sorted(generos.items())
     return generos
-
-# ------------- ORDENA ATORES (EXTRA) --------------
-
-def ordenaAtores(bd):
-    atores={}
-    for filme in bd:
-        for ator in filme['cast']:
-            ator=ator.replace("/","")
-            ator=ator.replace("\"","")
-            ator=ator.replace("/","")
-            ator=ator.replace("(","")
-            ator=ator.replace(")","")
-            ator=ator.replace(".","")
-            ator=ator.replace("\'","")
-            if ator!="":
-                if ator in atores.keys():
-                    atores[ator]=atores[ator]+', ' + filme['title'] + ': ' + filme['id']
-                else:
-                    atores[ator]=filme['title']+ ': ' + filme['id']
-    atores=sorted(atores.items())
-    return atores

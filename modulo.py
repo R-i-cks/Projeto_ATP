@@ -46,6 +46,12 @@ def id(bd):
             filme['id']=(str(i))
             listaID.append(str(i))
             i=i+1
+#  -------------
+def procuraID(id,bd):
+    for elem in bd:
+        if id == elem['id']:
+            return elem
+
 
 #  ------ LISTAR ALFABETICAMENTE ----------------
 

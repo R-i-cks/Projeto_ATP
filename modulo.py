@@ -78,6 +78,17 @@ def formatacao(bd):
         i=i+1
     return form
 
+
+def formatL(bd):
+    i=0
+    form=[]
+    while i<len(bd):
+        c = str(bd[i]['cast']).strip('[') 
+        d =str(bd[i]['genres']).strip('[')
+        form.append(bd[i]['title'] +' | ' +  str(bd[i]['year']) + ' | ' + c.strip(']') + ' | ' + d.strip(']') + ' | ' + bd[i]['id'] )
+        i=i+1
+    return form
+
 #  --------------- CONTA FILMES ------------------
 
 def contaFilmes(bd):

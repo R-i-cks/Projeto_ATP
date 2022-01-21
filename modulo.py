@@ -1,4 +1,6 @@
 import json
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 def lerficheiro(nome):
     if '.json' in nome:
@@ -47,7 +49,8 @@ def id(bd):
             listaID.append(str(i))
             i=i+1
 
-#  -------------
+#  ------------- PROCURA DE IDS -------------
+
 def procuraID(id,bd):
     for elem in bd:
         if id == elem['id']:
@@ -59,25 +62,6 @@ def eliminaent(bd,id):
             bd.remove(elem)
             return elem
 
-
-
-
-#  ------ LISTAR ALFABETICAMENTE ----------------
-
-def chaveOrd(d):
-    chave=d.replace("(","")
-    chave=chave.replace(")","")
-    chave=chave.replace("/","")
-    chave=chave.replace("\'","")
-    chave=chave.replace(".","")
-    chave=chave.replace(":","")
-    chave=chave.replace(",","")
-    chave=chave.replace("\"","")
-    return chave
-
-def listarAlfabeticamente(bd):
-    bd.sort(key=chaveOrd)
-    return bd        
 
 # ------------- FORMATACAO ----------------
 
@@ -112,35 +96,6 @@ def contaFilmes(bd):
         i=i+1
     return ['Há ' +str(i)+ ' filmes na Base de Dados!']
 
-
-#  ----------- DISTRIBUIÇÃO POR GÉNERO e ATORES -----------
-
-def distribuicao(bd,obj):           
-    dic={}
-    for filme in bd:
-        for elem in filme[obj]:
-            if elem in dic.keys():
-                dic[elem]=dic[elem]+1
-            else:
-                dic[elem]=1
-    return dic
-
-
-
-def plotGenero(d):
-    x=d.keys()
-    y=[]
-    for i in d.keys():
-        y.append(d[i])
-
-    fig = plt.figure(figsize=(45, 10))     # aumento da largura e altura do gráfico para que os nomes não se sobreponham
-    plt.xlabel("Género")
-    plt.ylabel("Quantidade")
-    plt.title("Distribuição por Género")
-    plt.margins(x=0.005)                   # diminuição das margens
-    plt.bar(x,y,width=0.9)
-    plt.show()
-
 #  ----------------------- ADICIONAR NOVO FILME ----------------------
 
 def novofilme(lista):
@@ -168,9 +123,35 @@ def consultarfilme(bd,nome):
     return correspondencia
 
 
-# ------------- DISTRIBUIR FILMES POR ATORES (TOP10) -----------
+# ------------- DISTRIBUIÇAO DE FILMES POR ATORES E POR GENERO (TOP10) -----------
 
+def distribuicao(bd,obj):           
+    dic={}
+    for filme in bd:
+        for elem in filme[obj]:
+            if elem in dic.keys():
+                dic[elem]=dic[elem]+1
+            else:
+                dic[elem]=1
+    return dic
 
+def top10Genero(d):
+    L=[]
+    i=0
+    totaloutros=0
+    orderGenres = sorted(d.items(), key=lambda item: item[1], reverse=True) #. items() trandorma o dicionário em tuplos
+    for elem in orderGenres:
+        if(i<10):
+            (objet, vezes)=elem
+            if objet !='and' and objet!= "(voice)":
+                L.append(elem)
+                i=i+1
+        else:
+            (objet, vezes)=elem
+            totaloutros=totaloutros+int(vezes)
+            
+    L.append(("Outros",totaloutros))
+    return L
 
 def top10Atores(d):
     L=[]
@@ -178,27 +159,28 @@ def top10Atores(d):
     orderActors = sorted(d.items(), key=lambda item: item[1], reverse=True) #. items() trandorma o dicionário em tuplos
     for elem in orderActors:
         if(i<10):
-            L.append(elem)
-            i=i+1
-        else:
-            break
+            (objet, vezes)=elem
+            if objet !='and' and objet!= "(voice)":
+                L.append(elem)
+                i=i+1
     return L
 
-
-def plotAtor(d):
+def plot(L, tipo):
     x=[]
     y=[]
-    
-    for f in d:
-        x.append(f[0])
-        y.append(f[1])
-    fig = plt.figure(figsize=(45, 10))     # aumento da largura e altura do gráfico para que os nomes não se sobreponham
-    plt.xlabel("Ator")
+    for recorrencia in L:
+        ( x1, y1 ) = recorrencia
+        x.append(x1)
+        y.append(y1)
+
+    fig = plt.figure(figsize=(13, 8))     # aumento da largura e altura do gráfico para que os nomes não se sobreponham
+    plt.xlabel(tipo)
     plt.ylabel("Quantidade")
-    plt.title("Distribuição por Filme")
+    plt.title("Distribuição por " + tipo)
     plt.margins(x=0.005)                   # diminuição das margens
     plt.bar(x,y,width=0.9)
-    plt.show()
+    plt.savefig('grafico.png', format='png')
+    return 'grafico.png'
 
 # ------------- DETETAR LISTA VAZIA --------------
 

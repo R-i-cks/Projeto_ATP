@@ -87,7 +87,7 @@ def contaFilmes(bd):
     return ['Há ' +str(i)+ ' filmes na Base de Dados!']
 
 
-#  ----------- DISTRIBUIÇÃO POR GÉNERO -----------
+#  ----------- DISTRIBUIÇÃO POR GÉNERO e ATORES -----------
 
 def distribuicao(bd,obj):           
     dic={}
@@ -144,15 +144,7 @@ def consultarfilme(bd,nome):
 
 # ------------- DISTRIBUIR FILMES POR ATORES (TOP10) -----------
 
-def distribporAtor(bd):
-    dic={}
-    for filme in bd:
-        for elem in (filme['cast']):
-            if elem in dic.keys():
-                dic[elem]=dic[elem]+1
-            else:
-                dic[elem]=1
-    return dic
+
 
 def top10Atores(d):
     L=[]

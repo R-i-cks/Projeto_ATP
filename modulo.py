@@ -47,10 +47,25 @@ def id(bd):
             listaID.append(str(i))
             i=i+1
 
+#  -------------
+def procuraID(id,bd):
+    for elem in bd:
+        if id == elem['id']:
+            return elem
+
+def eliminaent(bd,id):
+    for elem in bd:
+        if id == elem['id']:
+            bd.remove(elem)
+            return elem
+
+
+
+
 #  ------ LISTAR ALFABETICAMENTE ----------------
 
 def chaveOrd(d):
-    chave=d['title'].replace("(","")
+    chave=d.replace("(","")
     chave=chave.replace(")","")
     chave=chave.replace("/","")
     chave=chave.replace("\'","")
